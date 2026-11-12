@@ -37,7 +37,7 @@ sourceSets.main {
 
 tasks {
     jar {
-        archiveFileName.set("KillerMoney.jar")
+        archiveBaseName.set("KillerMoney")
     }
 
     processResources {

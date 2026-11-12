@@ -46,6 +46,7 @@ public class LangConfig extends SuperConfig {
     }
 
     private void generate() {
+        boolean changed = false;
         for (LanguageString ls : LanguageString.values()) {
             int firstLine = ls.name().indexOf("_");
             String parent = ls.name().substring(0, firstLine);
@@ -53,8 +54,10 @@ public class LangConfig extends SuperConfig {
 
             if (!getConfig().isSet(parent + "." + post)) {
                 getConfig().set(parent + "." + post, ls.getString());
+                changed = true;
             }
-
+        }
+        if (changed) {
             saveConfig();
         }
     }

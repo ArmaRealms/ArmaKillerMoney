@@ -3,7 +3,6 @@ package net.diecode.killermoney.functions;
 import net.diecode.killermoney.BukkitMain;
 import net.diecode.killermoney.Utils;
 import net.diecode.killermoney.configs.DefaultConfig;
-import net.diecode.killermoney.configs.LangConfig;
 import net.diecode.killermoney.enums.DivisionMethod;
 import net.diecode.killermoney.enums.KMPermission;
 import net.diecode.killermoney.enums.LanguageString;
@@ -25,11 +24,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.ItemMergeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -70,7 +69,7 @@ public class MoneyHandler implements Listener {
             } else {
                 BigDecimal money = ed.getCalculatedMoney().multiply(new BigDecimal(-1));
 
-                money = money.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                money = money.setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                 Bukkit.getPluginManager().callEvent(new KMLoseMoneyEvent(e.getMoneyProperties(), p,
                         money, e.getVictim(), ed.getDamage()));
@@ -124,8 +123,7 @@ public class MoneyHandler implements Listener {
                         e.getVictim().getName(), e.getAmount().doubleValue(), e.getDamage().doubleValue());
             } else {
                 message = LanguageManager.cGet(LanguageString.GENERAL_YOU_KILLED_AN_ENTITY_AND_EARN_MONEY,
-                        e.getVictim().getType(), LangConfig.getStrings().get(LanguageString.valueOf("ENTITIES_"
-                                + e.getVictim().getType().name())),
+                        e.getVictim().getType(), LanguageManager.getEntityName(e.getVictim().getType()),
                         e.getAmount().doubleValue(), e.getDamage().doubleValue());
             }
 
@@ -147,8 +145,7 @@ public class MoneyHandler implements Listener {
         // Send money losing message to player
         if (e.getPlayer() != null && e.getPlayer().isOnline()) {
             String message = LanguageManager.cGet(LanguageString.GENERAL_YOU_KILLED_AN_ENTITY_AND_LOSE_MONEY,
-                    e.getVictim().getType(), LangConfig.getStrings().get(LanguageString.valueOf("ENTITIES_"
-                            + e.getVictim().getType().name())),
+                    e.getVictim().getType(), LanguageManager.getEntityName(e.getVictim().getType()),
                     e.getAmount().doubleValue(), e.getDamage().doubleValue());
 
             MessageHandler.process(e.getPlayer(), message);
@@ -192,9 +189,9 @@ public class MoneyHandler implements Listener {
         }
     }
 
-    @EventHandler
-    public void onItemPickUp(PlayerPickupItemEvent e) {
-        if (e.isCancelled()) {
+    @EventHandler(ignoreCancelled = true)
+    public void onItemPickUp(EntityPickupItemEvent e) {
+        if (!(e.getEntity() instanceof Player player)) {
             return;
         }
 
@@ -203,12 +200,20 @@ public class MoneyHandler implements Listener {
 
         if (isMoneyItem(is)) {
             e.setCancelled(true);
+            if (BukkitMain.getEconomy() == null) {
+                return;
+            }
 
             BigDecimal money = new BigDecimal(Double.valueOf(ChatColor.stripColor(is.getItemMeta().getLore().get(0))
                     .replaceAll("[^0-9.]", "")))
-                    .setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                    .setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
-            EntityType entityType = EntityType.valueOf(is.getItemMeta().getLore().get(1));
+            EntityType entityType;
+            try {
+                entityType = EntityType.valueOf(is.getItemMeta().getLore().get(1));
+            } catch (IllegalArgumentException ignored) {
+                return;
+            }
             EntityProperties ep = EntityManager.getEntityProperties(entityType);
 
             if (ep == null) {
@@ -217,17 +222,17 @@ public class MoneyHandler implements Listener {
 
             UUID uuid = UUID.fromString(is.getItemMeta().getLore().get(2));
 
-            if (!DefaultConfig.isMoneyItemAnyonePickUp() && !uuid.equals(e.getPlayer().getUniqueId())) {
+            if (!DefaultConfig.isMoneyItemAnyonePickUp() && !uuid.equals(player.getUniqueId())) {
                 return;
             }
 
             WorldProperties wp = EntityManager.getWorldProperties(ep, e.getItem().getLocation().getWorld().getName());
 
-            if (wp != null) {
+            if (wp != null && wp.getMoneyProperties() != null) {
                 item.remove();
 
                 Bukkit.getPluginManager().callEvent(new KMEarnMoneyPickedUpEvent(wp.getMoneyProperties(),
-                        e.getPlayer(), money));
+                        player, money));
             }
         }
     }
@@ -263,7 +268,7 @@ public class MoneyHandler implements Listener {
         }
 
         BigDecimal money = new BigDecimal(Utils.randomNumber(mp.getMinMoney(),
-                mp.getMaxMoney())).setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                mp.getMaxMoney())).setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
         BigDecimal dividedMoney;
         BigDecimal remainingLimit;
         BigDecimal playerLimit;
@@ -296,11 +301,11 @@ public class MoneyHandler implements Listener {
                     playerLimit = mp.getLimit(killer);
 
                     // Calculating the money
-                    BigDecimal x = ed.getDamage().divide(new BigDecimal(victim.getMaxHealth()), BigDecimal.ROUND_HALF_EVEN);
+                    BigDecimal x = ed.getDamage().divide(new BigDecimal(victim.getMaxHealth()), RoundingMode.HALF_EVEN);
 
                     // Calculating remaining limit
                     remainingLimit = playerLimit.subtract(mp.getCurrentLimitValue(ed.getPlayerUUID()))
-                            .setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                            .setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                     // Divided money by victim damage
                     dividedMoney = new BigDecimal(money.multiply(x).doubleValue());
@@ -316,7 +321,7 @@ public class MoneyHandler implements Listener {
                     }
 
                     // Set scale
-                    dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                    dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                     ed.setCalculatedMoney(dividedMoney);
                     filteredDamagers.add(ed);
@@ -356,7 +361,7 @@ public class MoneyHandler implements Listener {
                 dividedMoney = dividedMoney.multiply(new BigDecimal(MultiplierHandler.getGlobalMultiplier()));
 
                 // Set scale
-                dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                 filteredDamagers.add(new EntityDamage(killer.getUniqueId(),
                         new BigDecimal(victim.getMaxHealth()), dividedMoney));
@@ -371,13 +376,13 @@ public class MoneyHandler implements Listener {
                 for (EntityDamage ed : damagers) {
 
                     // Calculating the money
-                    BigDecimal x = ed.getDamage().divide(new BigDecimal(victim.getMaxHealth()), BigDecimal.ROUND_HALF_EVEN);
+                    BigDecimal x = ed.getDamage().divide(new BigDecimal(victim.getMaxHealth()), RoundingMode.HALF_EVEN);
 
                     // Divided money by victim damage
                     dividedMoney = new BigDecimal(money.multiply(x).doubleValue());
 
                     // Set scale
-                    dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                    dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                     ed.setCalculatedMoney(dividedMoney);
                     filteredDamagers.add(ed);
@@ -387,7 +392,7 @@ public class MoneyHandler implements Listener {
                 dividedMoney = money;
 
                 // Set scale
-                dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
                 filteredDamagers.add(new EntityDamage(killer.getUniqueId(), new BigDecimal(victim.getMaxHealth()), dividedMoney));
             }
@@ -421,7 +426,7 @@ public class MoneyHandler implements Listener {
         im.setLore(lore);
 
         moneyItem.setItemMeta(im);
-        moneyItem.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+        moneyItem.addUnsafeEnchantment(Enchantment.UNBREAKING, 1);
 
         return moneyItem;
     }
@@ -434,7 +439,7 @@ public class MoneyHandler implements Listener {
             double i2Money = Double.valueOf(ChatColor.stripColor(i2.getItemMeta().getLore().get(0)).replaceAll("[^0-9.]", ""));
 
             BigDecimal sum = new BigDecimal(i1Money + i2Money)
-                    .setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
+                    .setScale(DefaultConfig.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
             ItemMeta im = is.getItemMeta();
             List<String> lore = im.getLore();
@@ -462,7 +467,7 @@ public class MoneyHandler implements Listener {
             return false;
         }
 
-        if (!itemStack.containsEnchantment(Enchantment.DURABILITY)) {
+        if (!itemStack.containsEnchantment(Enchantment.UNBREAKING)) {
             return false;
         }
 

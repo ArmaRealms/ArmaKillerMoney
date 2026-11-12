@@ -1,95 +1,58 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
-    alias(libs.plugins.java)
-    alias(libs.plugins.shadow)
+    java
     alias(libs.plugins.runpaper)
 }
 
 group = "net.diecode"
-version = "2.1.4"
+version = "5.0.0"
 
 repositories {
-    // Vault, TriumphGUI & ShopGUIPlus
-    maven("https://jitpack.io")
-    // TriumphCMD
-    maven("https://repo.triumphteam.dev/snapshots/")
-    // PaperMC
-    maven("https://repo.papermc.io/repository/maven-public/")
-    // EssentialsX
-    maven("https://repo.essentialsx.net/releases/")
-    // PlaceholderAPI
-    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
-    // PlayerPoints
-    maven("https://repo.rosewooddev.io/repository/public/")
-    // CrazyCrates
-    maven("https://repo.crazycrew.us/releases")
-    // PlayerWarps & PlayerAuctions
-    maven("https://repo.olziedev.com/")
-    // Oraxen
-    maven("https://repo.oraxen.com/releases")
-    // Floodgate
-    maven("https://repo.opencollab.dev/main/")
     mavenCentral()
-    flatDir { dirs("libs") }
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io") {
+        content { includeModule("com.github.MilkBowl", "VaultAPI") }
+    }
+    ivy("https://github.com/garbagemule/MobArena/releases/download") {
+        patternLayout { artifact("[revision]/[artifact]-[revision].[ext]") }
+        metadataSources { artifact() }
+        content { includeModule("com.garbagemule", "MobArena") }
+    }
 }
 
 dependencies {
-    implementation(libs.triumphgui)
-    implementation(libs.triumphcmd)
-    implementation(libs.jdwebhooks)
     compileOnly(libs.paperapi)
-    compileOnly(libs.hikaricp)
-    compileOnly(libs.luckpermsapi)
-    compileOnly(libs.placeholderapi)
-    compileOnly(libs.playerpoints)
-    compileOnly(libs.crazycratesapi)
-    compileOnly(libs.playerwarpsapi)
-    compileOnly(libs.playerauctionsapi)
-    compileOnly(libs.oraxenapi)
-    compileOnly(libs.floodgateapi)
-    compileOnly(libs.shopguiapi) { exclude("org.spigotmc") }
-    compileOnly(libs.essentialsx) { exclude("org.spigotmc") }
-    compileOnly(fileTree("libs"))
-    testImplementation(libs.junit.jupiter)
-    testRuntimeOnly(libs.junit.platform)
+    compileOnly(libs.vaultapi) { isTransitive = false }
+    compileOnly(libs.mobarena)
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+}
+
+sourceSets.main {
+    java.setSrcDirs(listOf("src"))
+    resources.setSrcDirs(listOf("src"))
+    resources.include("plugin.yml", "resources/**")
 }
 
 tasks {
-    withType<ShadowJar> {
-        archiveClassifier.set("")
-    }
-
-    withType<ProcessResources> {
+    processResources {
+        val pluginVersion = project.version.toString()
+        inputs.property("pluginVersion", pluginVersion)
         filesMatching("plugin.yml") {
-            expand("version" to project.version, "hikari" to libs.versions.hikaricp.get())
+            expand("version" to pluginVersion)
         }
     }
 
-    withType<JavaCompile> {
+    withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
-        options.compilerArgs.add("-parameters")
-    }
-
-    build {
-        dependsOn("apiJar")
-        dependsOn(shadowJar)
     }
 
     runServer {
-        minecraftVersion("1.21.8")
+        minecraftVersion(libs.versions.minecraft.get())
+        javaLauncher.set(project.javaToolchains.launcherFor(java.toolchain))
         jvmArguments.add("-Dcom.mojang.eula.agree=true")
-        jvmArguments.add("-Dnet.kyori.ansi.colorLevel=truecolor")
-        jvmArguments.add("-Dfile.encoding=UTF8")
         systemProperty("terminal.jline", false)
         systemProperty("terminal.ansi", true)
-    }
-
-    test {
-        useJUnitPlatform()
     }
 }

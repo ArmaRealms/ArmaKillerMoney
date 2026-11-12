@@ -286,7 +286,6 @@ public class EntitiesConfig extends SuperConfig {
                         ArrayList<CItem> items = new ArrayList<CItem>();
 
                         for (String num : numberSet) {
-                            ItemStack itemStack;
                             int minAmount = 0;
                             int maxAmount = 0;
                             double chance = 100;
@@ -294,12 +293,10 @@ public class EntitiesConfig extends SuperConfig {
                             int limit = 0;
 
                             // ItemStack value
-                            if (getConfig().isSet(entity + "." + world + ".Custom-item-drop.Items."
-                                    + num + ".ItemStack")) {
-                                itemStack = getConfig().getItemStack(entity + "." + world
-                                        + ".Custom-item-drop.Items." + num + ".ItemStack");
-                            } else {
-                                Logger.warning("Missing ItemStack value at " + entity
+                            ItemStack itemStack = getConfig().getItemStack(entity + "." + world
+                                    + ".Custom-item-drop.Items." + num + ".ItemStack");
+                            if (itemStack == null || itemStack.isEmpty()) {
+                                Logger.warning("Missing or invalid ItemStack at " + entity
                                         + " entity. ID: \"" + num + "\". Item drop disabled.");
 
                                 continue;

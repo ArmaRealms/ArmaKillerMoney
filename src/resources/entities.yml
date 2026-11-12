@@ -1,10 +1,24 @@
-# This config is not contains all features. Please check documentation at https://github.com/diecode/KillerMoney/blob/master/docs/Entities.md
-# If you don't want use a feature, just disable or remove it.
+# Entity types use the Paper 26.2 names. Reward sections can be disabled or omitted.
+# See docs/Entities.md at https://github.com/ArmaRealms/ArmaKillerMoney
 
-# Support on
-# - https://dev.bukkit.org/projects/killermoney
-# - https://www.spigotmc.org/resources/killermoney.485/
-
+ALLAY:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+ARMADILLO:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+AXOLOTL:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 BAT:
     '*':
         Money:
@@ -24,7 +38,10 @@ BAT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -50,7 +67,10 @@ BEE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -76,13 +96,40 @@ BLAZE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+BOGGED:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+BREEZE:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+CAMEL:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+CAMEL_HUSK:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 CAT:
     '*':
         Money:
@@ -102,7 +149,10 @@ CAT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -128,7 +178,10 @@ CAVE_SPIDER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -154,7 +207,10 @@ CHICKEN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -180,13 +236,22 @@ COD:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+COPPER_GOLEM:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 COW:
     '*':
         Money:
@@ -206,13 +271,22 @@ COW:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+CREAKING:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 CREEPER:
     '*':
         Money:
@@ -232,7 +306,10 @@ CREEPER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -258,7 +335,10 @@ DOLPHIN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -284,7 +364,10 @@ DONKEY:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -310,7 +393,10 @@ DROWNED:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -336,33 +422,10 @@ ELDER_GUARDIAN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
-                    Random-amount: 1 ? 5
-                    Chance: 100%
-        Custom-exp-drop:
-            Enabled: false
-            Value: 1 ? 100
-            Chance: 100%
-ENDER_DRAGON:
-    '*':
-        Money:
-            Enabled: false
-            Chance: 100%
-            Value: 1 ? 100
-        Custom-commands:
-            Enabled: false
-            Commands:
-                '1':
-                    Command: 'say {player} killed an entity!'
-                    Chance: 100%
-        Custom-item-drop:
-            Enabled: false
-            Keep-default-items: false
-            Items:
-                '1':
-                    ItemStack:
-                        ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -388,7 +451,10 @@ ENDERMAN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -414,7 +480,39 @@ ENDERMITE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
+                    Random-amount: 1 ? 5
+                    Chance: 100%
+        Custom-exp-drop:
+            Enabled: false
+            Value: 1 ? 100
+            Chance: 100%
+ENDER_DRAGON:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+        Custom-commands:
+            Enabled: false
+            Commands:
+                '1':
+                    Command: 'say {player} killed an entity!'
+                    Chance: 100%
+        Custom-item-drop:
+            Enabled: false
+            Keep-default-items: false
+            Items:
+                '1':
+                    ItemStack:
+                        ==: org.bukkit.inventory.ItemStack
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -440,7 +538,10 @@ EVOKER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -466,13 +567,22 @@ FOX:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+FROG:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 GHAST:
     '*':
         Money:
@@ -492,7 +602,10 @@ GHAST:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -518,13 +631,28 @@ GIANT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+GLOW_SQUID:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+GOAT:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 GUARDIAN:
     '*':
         Money:
@@ -544,13 +672,22 @@ GUARDIAN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+HAPPY_GHAST:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 HOGLIN:
     '*':
         Money:
@@ -570,7 +707,10 @@ HOGLIN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -596,7 +736,10 @@ HORSE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -622,13 +765,22 @@ HUSK:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+ILLUSIONER:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 IRON_GOLEM:
     '*':
         Money:
@@ -648,7 +800,10 @@ IRON_GOLEM:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -674,7 +829,10 @@ LLAMA:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -700,7 +858,39 @@ MAGMA_CUBE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
+                    Random-amount: 1 ? 5
+                    Chance: 100%
+        Custom-exp-drop:
+            Enabled: false
+            Value: 1 ? 100
+            Chance: 100%
+MOOSHROOM:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+        Custom-commands:
+            Enabled: false
+            Commands:
+                '1':
+                    Command: 'say {player} killed an entity!'
+                    Chance: 100%
+        Custom-item-drop:
+            Enabled: false
+            Keep-default-items: false
+            Items:
+                '1':
+                    ItemStack:
+                        ==: org.bukkit.inventory.ItemStack
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -726,39 +916,22 @@ MULE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
-MUSHROOM_COW:
+NAUTILUS:
     '*':
         Money:
             Enabled: false
             Chance: 100%
             Value: 1 ? 100
-        Custom-commands:
-            Enabled: false
-            Commands:
-                '1':
-                    Command: 'say {player} killed an entity!'
-                    Chance: 100%
-        Custom-item-drop:
-            Enabled: false
-            Keep-default-items: false
-            Items:
-                '1':
-                    ItemStack:
-                        ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
-                    Random-amount: 1 ? 5
-                    Chance: 100%
-        Custom-exp-drop:
-            Enabled: false
-            Value: 1 ? 100
-            Chance: 100%
 OCELOT:
     '*':
         Money:
@@ -778,7 +951,10 @@ OCELOT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -804,13 +980,22 @@ PANDA:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+PARCHED:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 PARROT:
     '*':
         Money:
@@ -830,7 +1015,10 @@ PARROT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -856,7 +1044,10 @@ PHANTOM:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -882,33 +1073,10 @@ PIG:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
-                    Random-amount: 1 ? 5
-                    Chance: 100%
-        Custom-exp-drop:
-            Enabled: false
-            Value: 1 ? 100
-            Chance: 100%
-PIG_ZOMBIE:
-    '*':
-        Money:
-            Enabled: false
-            Chance: 100%
-            Value: 1 ? 100
-        Custom-commands:
-            Enabled: false
-            Commands:
-                '1':
-                    Command: 'say {player} killed an entity!'
-                    Chance: 100%
-        Custom-item-drop:
-            Enabled: false
-            Keep-default-items: false
-            Items:
-                '1':
-                    ItemStack:
-                        ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -934,13 +1102,22 @@ PIGLIN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+PIGLIN_BRUTE:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 PILLAGER:
     '*':
         Money:
@@ -960,7 +1137,10 @@ PILLAGER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -986,7 +1166,10 @@ PLAYER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1017,7 +1200,10 @@ POLAR_BEAR:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1043,7 +1229,10 @@ PUFFERFISH:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1069,7 +1258,10 @@ RABBIT:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1095,7 +1287,10 @@ RAVAGER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1121,7 +1316,10 @@ SALMON:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1147,7 +1345,10 @@ SHEEP:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1173,7 +1374,10 @@ SHULKER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1199,7 +1403,10 @@ SILVERFISH:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1225,7 +1432,10 @@ SKELETON:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1251,7 +1461,10 @@ SKELETON_HORSE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1277,14 +1490,23 @@ SLIME:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
-SNOWMAN:
+SNIFFER:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+SNOW_GOLEM:
     '*':
         Money:
             Enabled: false
@@ -1303,7 +1525,10 @@ SNOWMAN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1329,7 +1554,10 @@ SPIDER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1355,7 +1583,10 @@ SQUID:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1381,7 +1612,10 @@ STRAY:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1407,13 +1641,28 @@ STRIDER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+SULFUR_CUBE:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+TADPOLE:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 TRADER_LLAMA:
     '*':
         Money:
@@ -1433,7 +1682,10 @@ TRADER_LLAMA:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1459,7 +1711,10 @@ TROPICAL_FISH:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1485,7 +1740,10 @@ TURTLE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1511,7 +1769,10 @@ VEX:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1537,7 +1798,10 @@ VILLAGER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1563,7 +1827,10 @@ VINDICATOR:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1589,13 +1856,22 @@ WANDERING_TRADER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+WARDEN:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 WITCH:
     '*':
         Money:
@@ -1615,7 +1891,10 @@ WITCH:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1641,7 +1920,10 @@ WITHER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1667,7 +1949,10 @@ WITHER_SKELETON:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1693,7 +1978,10 @@ WOLF:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1719,7 +2007,10 @@ ZOGLIN:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1745,7 +2036,10 @@ ZOMBIE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
@@ -1771,13 +2065,22 @@ ZOMBIE_HORSE:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:
             Enabled: false
             Value: 1 ? 100
             Chance: 100%
+ZOMBIE_NAUTILUS:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
 ZOMBIE_VILLAGER:
     '*':
         Money:
@@ -1797,7 +2100,39 @@ ZOMBIE_VILLAGER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GOLD_NUGGET
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
+                    Random-amount: 1 ? 5
+                    Chance: 100%
+        Custom-exp-drop:
+            Enabled: false
+            Value: 1 ? 100
+            Chance: 100%
+ZOMBIFIED_PIGLIN:
+    '*':
+        Money:
+            Enabled: false
+            Chance: 100%
+            Value: 1 ? 100
+        Custom-commands:
+            Enabled: false
+            Commands:
+                '1':
+                    Command: 'say {player} killed an entity!'
+                    Chance: 100%
+        Custom-item-drop:
+            Enabled: false
+            Keep-default-items: false
+            Items:
+                '1':
+                    ItemStack:
+                        ==: org.bukkit.inventory.ItemStack
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:gold_nugget
+                        count: 1
                     Random-amount: 1 ? 5
                     Chance: 100%
         Custom-exp-drop:

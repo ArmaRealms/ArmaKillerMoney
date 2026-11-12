@@ -1,11 +1,6 @@
-## Default config for KillerMoney v4.2.0
+## Default config for ArmaKillerMoney 5.0.0
 
 ```yaml
-# Please check documentation at https://github.com/diecode/KillerMoney/blob/master/docs/Config.md
-# Do not modify this
-Config-version: 3
-
-Check-update: true
 Global-settings:
     Money:
         Decimal-places: 2
@@ -18,6 +13,7 @@ Global-settings:
         Disable-spawner-farming: true
         Disable-spawner-egg-farming: false
     General:
+        # CHAT, ACTION_BAR, or DISABLED
         Message-method: CHAT
         Allowed-gamemodes: SURVIVAL, CREATIVE
     Limit:
@@ -41,18 +37,6 @@ Hook:
 ## Configuration manual
 
 ```yaml
-Config-version: 1
-```
-
-+ **Config-version:** Current config version, do not modify this
-
-```yaml
-Check-update: true
-```
-
-+ **Check-update:** Check update when server start. Valid values: true or false
-
-```yaml
 Global-settings:
     Money:
         Decimal-places: 2
@@ -74,7 +58,7 @@ Drop money reward on the ground.
 
 + **Enabled:** Enable or disable Item drop function. Acceptable values: true or false
 + **Item-name:** Item name on the ground. You can use color codes in the name. The {amount} will be replaced with money amount.
-+ **Item-material:** Item material. You must use valid MATERIAL name. [Acceptable values](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html) (depend from server version)
++ **Item-material:** Item material. Use a Paper 26.2 item material such as `GOLD_INGOT` or `minecraft:gold_ingot`. [Material list](https://jd.papermc.io/paper/26.2/org/bukkit/Material.html)
 + **Anyone-can-pick-it-up:** Any player can pick up the money item, or only the killer
 
 ```yaml
@@ -94,7 +78,7 @@ Global-settings:
         Allowed-gamemodes: SURVIVAL, CREATIVE
 ```
 
-+ **Message-method:** Money reward message position. Acceptable values: "CHAT", "ACTION_BAR" or "DISABLED".
++ **Message-method:** Show reward messages in chat (`CHAT`), above the hotbar (`ACTION_BAR`), or disable them (`DISABLED`).
 + **Allowed-gamemodes:** KillerMoney disable functions in disallowed gamemodes. Acceptable values: "SURVIVAL", "CREATIVE" and "ADVENTURE".
 You can set more gamemodes.
 

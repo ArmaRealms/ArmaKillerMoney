@@ -1,5 +1,7 @@
 ## Entities config
 
+Use the [Paper 26.2 entity names](https://jd.papermc.io/paper/26.2/org/bukkit/entity/EntityType.html) as top-level keys.
+
 ```yaml
 PLAYER:
     '*':
@@ -32,7 +34,10 @@ PLAYER:
                 '1':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: GRASS
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:short_grass
+                        count: 1
                     Random-amount: 1 ? 20
                     Chance: 100%
                     Permission: 'km.custom.permission'
@@ -40,8 +45,10 @@ PLAYER:
                 '2':
                     ItemStack:
                         ==: org.bukkit.inventory.ItemStack
-                        type: DIAMOND_SWORD
-                        amount: 32
+                        schema_version: 1
+                        DataVersion: 4903
+                        id: minecraft:diamond
+                        count: 32
                     Chance: 80%
                     Permission: 'km.custom.permission'
                     Limit: 200
@@ -120,7 +127,7 @@ You can set negative numbers too: **Value: -50 ? 50**
 
 + **Division-method:** Acceptable values: "LAST_HIT" or "SHARED". If you choose SHARED, then the reward will divide between entity damagers. LAST_HIT will reward only the killer (last damager) with full amount of reward. _<optional, default value is LAST_HIT>_
 + **Permission:** You can set custom permission. If player hasn't this perm, then player will not get reward. _<optional, there isn't default value>_
-+ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/km limit reset** command. _<optional, there isn't default value>_
++ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/kmadmin limit reset** command. _<optional, there isn't default value>_
 
 ---
 
@@ -149,7 +156,7 @@ Custom-commands:
 + **Command:** That command which you want execute. The {player} will be replaced with killer's name.
 + **Chance:** Command chance. Min: 1%, max: 100% _<optional, default value is 100%>_
 + **Permission:** You can set custom permission. If player hasn't this perm, then the command will not be execute. _<optional, there isn't default value>_
-+ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/km limit reset** command. _<optional, there isn't default value>_
++ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/kmadmin limit reset** command. _<optional, there isn't default value>_
 
 ```yaml
 Custom-item-drop:
@@ -160,7 +167,10 @@ Custom-item-drop:
         '1':
             ItemStack:
                 ==: org.bukkit.inventory.ItemStack
-                type: GRASS
+                schema_version: 1
+                DataVersion: 4903
+                id: minecraft:short_grass
+                count: 1
             Random-amount: 1 ? 20
             Chance: 100%
             Permission: 'km.custom.permission'
@@ -168,8 +178,10 @@ Custom-item-drop:
         '2':
             ItemStack:
                 ==: org.bukkit.inventory.ItemStack
-                type: DIAMOND_SWORD
-                amount: 32
+                schema_version: 1
+                DataVersion: 4903
+                id: minecraft:diamond
+                count: 32
             Chance: 80%
             Permission: 'km.custom.permission'
             Limit: 200
@@ -182,60 +194,36 @@ Set custom item drop
 + **Run-method:** Acceptable values: "ALL" or "RANDOM". If you choose "ALL", then all command will execute. If random, then only one. _<optional, default value is ALL>_
 + **"Number:"** If you add more commands, you must increment the number. Same number is not allowed.
 
-> DO NOT MODIFY THIS
-```yaml
-ItemStack:
-    ==: org.bukkit.inventory.ItemStack
-```
-+ **type:** MATERIAL name, [Acceptable values](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html) (depend from server version)
++ **ItemStack:** Use Paper's serialized item map with `schema_version: 1`, `DataVersion: 4903`, an item `id` and a `count`.
 + **Random-amount:** Set random amount for ItemStack. If you don't want random amount, just remove it. _<optional, there isn't default value>_
 + **Chance:** Command chance. Min: 1%, max: 100% _<optional, default value is 100%>_
 + **Permission:** You can set custom permission. If player hasn't this perm, then the command will not be execute. _<optional, there isn't default value>_
-+ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/km limit reset** command. _<optional, there isn't default value>_
++ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/kmadmin limit reset** command. _<optional, there isn't default value>_
 
-> ItemStack examples
+### ItemStack examples
 
-+ **Leaping potion**
+A sheep spawn egg.
+
 ```yaml
 ItemStack:
     ==: org.bukkit.inventory.ItemStack
-    type: POTION
-    damage: 8235
+    schema_version: 1
+    DataVersion: 4903
+    id: minecraft:sheep_spawn_egg
+    count: 1
 ```
 
-+ **Sheep spawner egg**
-```yaml
-ItemStack:
-    ==: org.bukkit.inventory.ItemStack
-    type: MONSTER_EGG
-    damage: 91
-```
+An iron sword with enchantments.
 
-+ **Gold ingot with amount settings and item meta**
 ```yaml
 ItemStack:
     ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    amount: 32
-    meta:
-        ==: ItemMeta
-        meta-type: UNSPECIFIC
-        display-name: "§cAmazing gold ingot"
-        lore:
-        - "§2Nicest"
-```
-
-+ **Iron sword with enchants**
-```yaml
-ItemStack:
-    ==: org.bukkit.inventory.ItemStack
-    type: IRON_SWORD
-    meta:
-        ==: ItemMeta
-        meta-type: UNSPECIFIC
-        enchants:
-            KNOCKBACK: 1
-            FIRE_ASPECT: 1
+    schema_version: 1
+    DataVersion: 4903
+    id: minecraft:iron_sword
+    count: 1
+    components:
+        minecraft:enchantments: '{"minecraft:knockback":1,"minecraft:fire_aspect":1}'
 ```
 ---
 > You can set custom experience point drop
@@ -254,7 +242,7 @@ Custom-exp-drop:
 Example for random: Value: 100 ? 200
 Example for fix: Value: 100
 + **Permission:** You can set custom permission. If player hasn't this perm, then player will not get reward. <optional, there isn't default value>
-+ **Limit:** If players reached limit with exp earning, then players will not get reward while server restart or limit reset. You can set limit reset time in config.yml and you can reset it manually with /km limit reset command. <optional, there isn't default value>
++ **Limit:** If players reached limit with exp earning, then players will not get reward while server restart or limit reset. You can set limit reset time in config.yml and you can reset it manually with /kmadmin limit reset command. <optional, there isn't default value>
 ---
 > Transfer money between killer (earn) and victim (lose). You can only use this in PLAYER entity section.
 ```yaml
@@ -273,4 +261,4 @@ Cash-transfer:
 + **Max-amount:** Maximum earning limit in one kill. _<optional, there isn't default value>_
 + **Chance:** Transfer chance. Min: 1%, max: 100% _<optional, default value is 100%>_
 + **Division-method:** Acceptable values: "LAST_HIT" or "SHARED". If you choose SHARED, then the reward will divide between entity damagers. LAST_HIT will reward only the killer (last damager) with full amount of reward. _<optional, default value is LAST_HIT>_
-+ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/km limit reset** command. _<optional, there isn't default value>_
++ **Limit:** If players reached limit with money earning, then players will not get reward while server restart or limit reset. You can set limit reset time in **config.yml** and you can reset it manually with **/kmadmin limit reset** command. _<optional, there isn't default value>_

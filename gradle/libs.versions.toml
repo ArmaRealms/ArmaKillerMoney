@@ -1,45 +1,14 @@
 [versions]
-shadow = "9.0.2"
-runpaper = "2.3.1"
-triumphgui = "3.1.13-SNAPSHOT"
-triumphcmd = "2.0.0-SNAPSHOT"
-paperapi = "1.21.8-R0.1-SNAPSHOT"
-hikaricp = "7.0.2"
-luckpermsapi = "5.5"
-essentialsx = "2.21.2"
-placeholderapi = "2.11.6"
-playerpoints = "3.3.3"
-crazycratesapi = "0.3"
-shopguiapi = "3.1.0"
-playerwarpsapi = "6.30.0"
-playerauctionsapi = "1.31.1"
-oraxenapi = "1.192.0"
-floodgateapi = "development-3.0.0-SNAPSHOT"
-jdwebhooks = "1.1.0"
-junit-jupiter = "5.13.4"
-junit-platform = "1.13.4"
+minecraft = "26.2"
+paperapi = "26.2.build.135-stable"
+vaultapi = "1.7.1"
+mobarena = "0.109"
+runpaper = "3.1.0"
 
 [plugins]
-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 runpaper = { id = "xyz.jpenilla.run-paper", version.ref = "runpaper" }
-java = { id = "java" }
 
 [libraries]
-triumphgui = { group = "dev.triumphteam", name = "triumph-gui-paper", version.ref = "triumphgui" }
-triumphcmd = { group = "dev.triumphteam", name = "triumph-cmd-bukkit", version.ref = "triumphcmd" }
-
-paperapi = { group = "io.papermc.paper", name = "paper-api", version.ref = "paperapi" }
-hikaricp = { group = "com.zaxxer", name = "HikariCP", version.ref = "hikaricp" }
-luckpermsapi = { group = "net.luckperms", name = "api", version.ref = "luckpermsapi" }
-essentialsx = { group = "net.essentialsx", name = "EssentialsX", version.ref = "essentialsx" }
-placeholderapi = { group = "me.clip", name = "placeholderapi", version.ref = "placeholderapi" }
-playerpoints = { group = "org.black_ixx", name = "playerpoints", version.ref = "playerpoints" }
-crazycratesapi = { group = "us.crazycrew.crazycrates", name = "api", version.ref = "crazycratesapi" }
-shopguiapi = { group = "com.github.brcdev-minecraft", name = "shopgui-api", version.ref = "shopguiapi" }
-playerwarpsapi = { group = "com.olziedev", name = "playerwarps-api", version.ref = "playerwarpsapi" }
-playerauctionsapi = { group = "com.olziedev", name = "playerauctions-api", version.ref = "playerauctionsapi" }
-oraxenapi = { group = "io.th0rgal", name = "oraxen", version.ref = "oraxenapi" }
-floodgateapi = { group = "org.geysermc.floodgate", name = "api", version.ref = "floodgateapi" }
-jdwebhooks = { group = "io.github.4drian3d", name = "jdwebhooks", version.ref = "jdwebhooks" }
-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
-junit-platform = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit-platform" }
+paperapi = { module = "io.papermc.paper:paper-api", version.ref = "paperapi" }
+vaultapi = { module = "com.github.MilkBowl:VaultAPI", version.ref = "vaultapi" }
+mobarena = { module = "com.garbagemule:MobArena", version.ref = "mobarena" }

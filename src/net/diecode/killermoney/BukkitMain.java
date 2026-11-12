@@ -3,7 +3,6 @@ package net.diecode.killermoney;
 import com.garbagemule.MobArena.MobArenaHandler;
 import net.diecode.killermoney.commands.KMAdminCommand;
 import net.diecode.killermoney.commands.KMCommand;
-import net.diecode.killermoney.configs.DefaultConfig;
 import net.diecode.killermoney.functions.*;
 import net.diecode.killermoney.managers.ConfigManager;
 import net.diecode.killermoney.managers.EntityManager;
@@ -20,32 +19,13 @@ import java.util.UUID;
 public class BukkitMain extends JavaPlugin {
 
     private static BukkitMain instance;
-    private static Metrics metrics;
 
     private static Economy economy;
     private static MobArenaHandler mobArenaHandler;
-    private static Updater updater;
-
-    private void initMetrics() {
-        metrics = new Metrics(this);
-        metrics.addCustomChart(new Metrics.SimplePie("used_message_method") {
-            @Override
-            public String getValue() {
-                return DefaultConfig.getMessageMethod().name().toUpperCase();
-            }
-        });
-
-        metrics.addCustomChart(new Metrics.SimplePie("used_money_item_drop") {
-            @Override
-            public String getValue() {
-                return DefaultConfig.isMoneyItemDropEnabled() ? "Enabled" : "Disabled";
-            }
-        });
-    }
 
     private boolean initEconomy() {
         RegisteredServiceProvider<Economy> economyProvider =
-                Bukkit.getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+                Bukkit.getServicesManager().getRegistration(Economy.class);
 
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
@@ -54,32 +34,18 @@ public class BukkitMain extends JavaPlugin {
         return (economy != null);
     }
 
-    private void hookMobArena() {
-        if (Bukkit.getPluginManager().getPlugin("MobArena") != null) {
-            mobArenaHandler = new MobArenaHandler();
-
-            Logger.info("MobArena hooked");
-        } else {
-            Logger.info("MobArena not found");
-        }
-    }
-
     @Override
     public void onEnable() {
         instance = this;
 
         ConfigManager.init();
 
-        updater = new Updater();
-
-        initMetrics();
-
-        if (!initEconomy()) {
+        if (!Bukkit.getPluginManager().isPluginEnabled("Vault") || !initEconomy()) {
             Logger.warning("Vault or economy plugin not found! Money reward disabled.");
         }
 
-        if (DefaultConfig.isHookMobArena()) {
-            hookMobArena();
+        if (Bukkit.getPluginManager().isPluginEnabled("MobArena")) {
+            mobArenaHandler = new MobArenaHandler();
         }
 
         getCommand("km").setExecutor(new KMCommand());
@@ -96,18 +62,6 @@ public class BukkitMain extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new LimitHandler(), this);
         Bukkit.getPluginManager().registerEvents(new MultiplierHandler(), this);
         Bukkit.getPluginManager().registerEvents(new KMPlayerManager(), this);
-        Bukkit.getPluginManager().registerEvents(updater, this);
-
-        if (DefaultConfig.isCheckUpdate()) {
-            getServer().getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
-                @Override
-                public void run() {
-                    if (!Updater.isUpdateAvailable()) {
-                        updater.query();
-                    }
-                }
-            }, 20L, 20L * 60 * 60 * 24);
-        }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             UUID pUUID = p.getUniqueId();
@@ -121,7 +75,8 @@ public class BukkitMain extends JavaPlugin {
     @Override
     public void onDisable() {
         instance = null;
-        updater = null;
+        economy = null;
+        mobArenaHandler = null;
     }
 
     public static BukkitMain getInstance() {
@@ -134,5 +89,9 @@ public class BukkitMain extends JavaPlugin {
 
     public static MobArenaHandler getMobArenaHandler() {
         return mobArenaHandler;
+    }
+
+    public static boolean isPlayerInArena(Player player) {
+        return mobArenaHandler != null && mobArenaHandler.isPlayerInArena(player);
     }
 }

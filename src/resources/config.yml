@@ -1,8 +1,4 @@
-# Please check documentation at https://github.com/diecode/KillerMoney/blob/master/docs/Config.md
-# Do not modify this
-Config-version: 6
-
-Check-update: true
+# See docs/Config.md at https://github.com/ArmaRealms/ArmaKillerMoney
 Global-settings:
     Money:
         Decimal-places: 2
@@ -15,6 +11,7 @@ Global-settings:
         Disable-spawner-farming: true
         Disable-spawner-egg-farming: false
     General:
+        # CHAT, ACTION_BAR, or DISABLED
         Message-method: CHAT
         Allowed-gamemodes: SURVIVAL, CREATIVE
     Limit:

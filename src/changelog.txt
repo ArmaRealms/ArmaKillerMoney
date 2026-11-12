@@ -1,3 +1,10 @@
+5.0.0
+---
+- Requires Paper 26.2 and Java 25.
+- Uses the Paper Adventure API for action bars and the current item pickup event.
+- Updates the build, Vault and MobArena dependencies, entity keys and item examples.
+- Removes legacy configuration migrations, the upstream update checker and the embedded bStats collector.
+
 4.6.0
 ---
 - (Added) 1.16 support

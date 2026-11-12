@@ -1,21 +1,21 @@
 package net.diecode.killermoney.functions;
 
 import net.diecode.killermoney.BukkitMain;
-import net.diecode.killermoney.Logger;
 import net.diecode.killermoney.configs.DefaultConfig;
 import net.diecode.killermoney.enums.LanguageString;
-import net.diecode.killermoney.enums.MessageMethod;
 import net.diecode.killermoney.events.KMSendActionBarMessageEvent;
 import net.diecode.killermoney.events.KMSendMessageEvent;
-import net.diecode.killermoney.interfaces.IActionBar;
 import net.diecode.killermoney.managers.KMPlayerManager;
 import net.diecode.killermoney.managers.LanguageManager;
 import net.diecode.killermoney.objects.KMPlayer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
@@ -23,41 +23,42 @@ import java.util.UUID;
 
 public class MessageHandler implements Listener {
 
-    private static IActionBar actionBar;
-    private static HashMap<UUID, BukkitTask> timers = new HashMap<UUID, BukkitTask>();
+    private final HashMap<UUID, BukkitTask> timers = new HashMap<>();
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onSendMessage(KMSendMessageEvent e) {
-        e.getPlayer().sendMessage(LanguageManager.cGet(LanguageString.GENERAL_PREFIX) + e.getMessage());
+        String message = LanguageManager.cGet(LanguageString.GENERAL_PREFIX) + e.getMessage();
+        e.getPlayer().sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
     }
 
-    @EventHandler
-    public void onActionBarMessage(final KMSendActionBarMessageEvent e) {
-        final UUID puuid = e.getPlayer().getUniqueId();
-
-        if (timers.containsKey(puuid)) {
-            BukkitTask task = timers.get(puuid);
-
-            task.cancel();
+    @EventHandler(ignoreCancelled = true)
+    public void onActionBarMessage(KMSendActionBarMessageEvent e) {
+        Player player = e.getPlayer();
+        UUID playerId = player.getUniqueId();
+        BukkitTask previousTask = timers.remove(playerId);
+        if (previousTask != null) {
+            previousTask.cancel();
         }
 
-        BukkitTask task = Bukkit.getScheduler().runTaskTimer(BukkitMain.getInstance(), new Runnable() {
+        Component message = LegacyComponentSerializer.legacySection().deserialize(e.getMessage());
+        player.sendActionBar(message);
+        if (e.getDuration() <= 1) {
+            return;
+        }
+
+        BukkitTask task = new BukkitRunnable() {
+            private int remaining = e.getDuration() - 1;
+
             @Override
             public void run() {
-                actionBar.sendActionBarMessage(e.getPlayer(), e.getMessage());
-            }
-        }, 0L, 20L);
-
-        timers.put(puuid, task);
-
-        Bukkit.getScheduler().runTaskLater(BukkitMain.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                if (timers.containsKey(puuid)) {
-                    timers.get(puuid).cancel();
+                player.sendActionBar(message);
+                if (--remaining == 0) {
+                    cancel();
+                    timers.remove(playerId);
                 }
             }
-        }, e.getDuration() * 20L);
+        }.runTaskTimer(BukkitMain.getInstance(), 20L, 20L);
+        timers.put(playerId, task);
     }
 
     public static void process(Player player, String message) {
@@ -76,22 +77,6 @@ public class MessageHandler implements Listener {
 
             case CHAT:                  pm.callEvent(new KMSendMessageEvent(player, message));
                                         break;
-        }
-    }
-
-    public static void initActionBar() {
-        String version;
-
-        try {
-            version = Bukkit.getServer().getClass().getPackage().getName().replace(".",  ",").split(",")[3];
-
-            Class actionBarClass = Class.forName("net.diecode.killermoney.compatibility.actionbar.ActionBar_" + version);
-
-            actionBar = (IActionBar)actionBarClass.newInstance();
-        } catch (Exception e) {
-            Logger.warning("Action bar is not compatibility with this server version. Using default \"CHAT\" value.");
-
-            DefaultConfig.setMessageMethod(MessageMethod.CHAT);
         }
     }
 

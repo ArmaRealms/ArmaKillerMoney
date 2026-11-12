@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -61,10 +62,9 @@ public class EntityManager implements Listener {
         }
 
         // MobArena support
-        if ((BukkitMain.getMobArenaHandler() != null) && DefaultConfig.isDisableRewardsInArena()) {
-            if (BukkitMain.getMobArenaHandler().isPlayerInArena(killerP)) {
-                return;
-            }
+        if (DefaultConfig.isHookMobArena() && DefaultConfig.isDisableRewardsInArena()
+                && BukkitMain.isPlayerInArena(killerP)) {
+            return;
         }
 
         for (WorldProperties wp : ep.getWorldProperties()) {
@@ -154,7 +154,7 @@ public class EntityManager implements Listener {
             dmg = entity.getHealth();
         }
 
-        BigDecimal damage = new BigDecimal(dmg).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        BigDecimal damage = new BigDecimal(dmg).setScale(2, RoundingMode.HALF_EVEN);
 
         if (entityDamages.containsKey(euuid)) {
             ArrayList<EntityDamage> damages = entityDamages.get(euuid);

@@ -1,4 +1,6 @@
-# KillerMoney 4 (Bukkit plugin)
+# ArmaKillerMoney
+
+KillerMoney fork for Paper 26.2 and Java 25.
 
 ## Abilities of the plugin
 + Giving or charging a player by either a fix amount of money, or random between a max and minimum amount when they kill an entity
@@ -15,9 +17,10 @@
 ## Commands
 + /km help
 + /km info
-+ /km limit <reset or clear>
-+ /km multiplier <set, get, reset>
-+ /km reload
++ /km enable-messages <on or off>
++ /kmadmin limit reset
++ /kmadmin multiplier <set, get, cancel>
++ /kmadmin reload
 
 ## Permissions
 | Permission | Description |
@@ -31,12 +34,23 @@
 | km.moneylimit.multiplier.NAME_FROM_CONFIG | Money limit multiplier |
 
 ## Installing
-+ Step 0: If you have either KillerMoney 1.x, 2.x or 3.x installed, delete it with all files and configurations.
-+ Step 1: Install VAULT and Economy plugins (for example Essentials, BOSEconomy, iConomy, etc.) if you want use money reward feature.
-+ Step 2: Download the latest version of KillerMoney and copy it into your plugins folder.
-+ Step 3: Restart your server for the plugin files to generate and for the plugin to load.
-+ Step 4: Customise config.yml and entities.yml files to your like and set your language in the lang.yml file.
-+ Step 5: Use it and send feedback for future developments
+
+1. Use Paper 26.2 with Java 25.
+2. Install Vault and a Vault-compatible economy provider to enable money rewards and transfers. MobArena is optional.
+3. Run `./gradlew build` and put the JAR from `build/libs` in the server's `plugins` directory.
+4. Start the server and edit [config.yml](docs/Config.md), [entities.yml](docs/Entities.md) and `lang.yml` in `plugins/KillerMoney`.
+
+## Upgrading from KillerMoney 4.x
+
+Back up `plugins/KillerMoney` and collect outstanding money items before replacing the JAR. Keep your customized configuration and player data. Rename the following keys in `entities.yml` and under `ENTITIES` in `lang.yml`.
+
+| Previous key | Paper 26.2 key |
+| ------------ | -------------- |
+| `MUSHROOM_COW` | `MOOSHROOM` |
+| `PIG_ZOMBIE` | `ZOMBIFIED_PIGLIN` |
+| `SNOWMAN` | `SNOW_GOLEM` |
+
+Remove `Config-version` and `Check-update` from `config.yml`. Use the [Paper item examples](docs/Entities.md) to update any custom drops that still use numeric item data values.
 
 ## API (WIP)
 

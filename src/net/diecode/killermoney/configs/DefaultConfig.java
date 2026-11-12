@@ -2,7 +2,6 @@ package net.diecode.killermoney.configs;
 
 import net.diecode.killermoney.Logger;
 import net.diecode.killermoney.enums.MessageMethod;
-import net.diecode.killermoney.functions.MessageHandler;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -10,14 +9,13 @@ import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Set;
 
 public class DefaultConfig extends SuperConfig {
 
     private static DefaultConfig instance;
 
-    private static int configVersion;
-    private static boolean checkUpdate;
     private static int decimalPlaces;
     private static MessageMethod messageMethod;
     private static boolean hookMobArena;
@@ -40,39 +38,23 @@ public class DefaultConfig extends SuperConfig {
         super(fileName);
 
         instance = this;
-
-        init();
-    }
-
-    private void init() {
-        // Get config version
-        configVersion = DefaultConfig.getInstance().getConfig().getInt("Config-version");
     }
 
     @Override
     public void load() {
         reload();
 
-        // Get config version
-        configVersion = DefaultConfig.getInstance().getConfig().getInt("Config-version");
-
-        // Check update
-        checkUpdate = getConfig().getBoolean("Check-update");
-
         // Money decimal places
         decimalPlaces = getConfig().getInt("Global-settings.Money.Decimal-places");
 
         // Message method value
         try {
-            messageMethod = MessageMethod.valueOf(getConfig().getString("Global-settings.General.Message-method").toUpperCase());
-        } catch (Exception e) {
+            messageMethod = MessageMethod.valueOf(getConfig().getString("Global-settings.General.Message-method", "CHAT")
+                    .toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
             messageMethod = MessageMethod.CHAT;
 
             Logger.warning("Invalid message method value. Using default \"CHAT\" value.");
-        }
-
-        if (messageMethod == MessageMethod.ACTION_BAR) {
-            MessageHandler.initActionBar();
         }
 
         // Mobarena support
@@ -96,31 +78,35 @@ public class DefaultConfig extends SuperConfig {
         reachedLimitMessage = getConfig().getBoolean("Global-settings.Limit.Reached-limit-message");
 
         // Allowed gamemodes
+        allowedGameModes.clear();
         String[] splitted = getConfig().getString("Global-settings.General.Allowed-gamemodes").replace(" ", "").split(",");
 
         for (String s : splitted) {
             try {
-                GameMode gamemode = GameMode.valueOf(s.toUpperCase());
+                GameMode gamemode = GameMode.valueOf(s.toUpperCase(Locale.ROOT));
 
                 if (!allowedGameModes.contains(gamemode)) {
                     allowedGameModes.add(gamemode);
                 }
-            } catch (Exception e) {
-                Logger.warning("Invalid gamemode type: " + s.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                Logger.warning("Invalid gamemode type: " + s);
             }
         }
 
         // Money Item drop settings
         moneyItemDropEnabled = getConfig().getBoolean("Global-settings.Money.Item-drop.Enabled");
         moneyItemName = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Global-settings.Money.Item-drop.Item-name"));
-        moneyItemAnyonePickUp = getConfig().getBoolean("Global-settings.Money.Item-drop.Anyone-can-pick-it-up");
+        moneyItemAnyonePickUp = getConfig().getBoolean("Global-settings.Money.Item-drop.Anyone-can-pick-it-up", true);
 
-        try {
-            moneyItemMaterial = Material.valueOf(getConfig().getString("Global-settings.Money.Item-drop.Item-material"));
-        } catch (Exception e) {
-            Logger.warning("Invalid money item material. Using default: " + moneyItemMaterial.name());
+        Material material = Material.matchMaterial(getConfig().getString("Global-settings.Money.Item-drop.Item-material", "GOLD_INGOT"));
+        if (material != null && material.isItem() && !material.isAir()) {
+            moneyItemMaterial = material;
+        } else {
+            moneyItemMaterial = Material.GOLD_INGOT;
+            Logger.warning("Invalid money item material. Using default: GOLD_INGOT");
         }
 
+        permBasedMoneyMultipliers.clear();
         Set<String> perms = getConfig().getConfigurationSection("Configurable-permissions.Money-multipliers")
                 .getKeys(false);
 
@@ -134,6 +120,7 @@ public class DefaultConfig extends SuperConfig {
             }
         }
 
+        permBasedLimitMultipliers.clear();
         perms = getConfig().getConfigurationSection("Configurable-permissions.Limit-multipliers").getKeys(false);
 
         for (String s : perms) {
@@ -151,24 +138,12 @@ public class DefaultConfig extends SuperConfig {
         return instance;
     }
 
-    public static int getConfigVersion() {
-        return configVersion;
-    }
-
-    public static boolean isCheckUpdate() {
-        return checkUpdate;
-    }
-
     public static int getDecimalPlaces() {
         return decimalPlaces;
     }
 
     public static MessageMethod getMessageMethod() {
         return messageMethod;
-    }
-
-    public static void setMessageMethod(MessageMethod messageMethod) {
-        DefaultConfig.messageMethod = messageMethod;
     }
 
     public static boolean isHookMobArena() {

@@ -37,7 +37,7 @@ KillerMoney fork for Paper 26.2 and Java 25.
 
 1. Use Paper 26.2 with Java 25.
 2. Install Vault and a Vault-compatible economy provider to enable money rewards and transfers. MobArena is optional.
-3. Run `./gradlew build` and put the JAR from `build/libs` in the server's `plugins` directory.
+3. Run `./gradlew build` and copy `build/libs/KillerMoney.jar` into the server's `plugins` directory.
 4. Start the server and edit [config.yml](docs/Config.md), [entities.yml](docs/Entities.md) and `lang.yml` in `plugins/KillerMoney`.
 
 ## Upgrading from KillerMoney 4.x

@@ -36,6 +36,10 @@ sourceSets.main {
 }
 
 tasks {
+    jar {
+        archiveFileName.set("KillerMoney.jar")
+    }
+
     processResources {
         val pluginVersion = project.version.toString()
         inputs.property("pluginVersion", pluginVersion)
